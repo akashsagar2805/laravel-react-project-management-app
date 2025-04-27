@@ -1,4 +1,5 @@
 import Pagination from "@/Components/Pagination";
+import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link } from "@inertiajs/react";
 
@@ -32,25 +33,45 @@ export default function Index({ auth, projects }) {
                 </thead>
                 <tbody>
                   {projects.data.map((project) => (
-                     <tr key={project.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr
+                      key={project.id}
+                      className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                    >
                       <td className="px-3 py-3">{project.id}</td>
-                      <td className="px-3 py-3"><img src={project.image_path} alt="" style={{width: 60}}/></td>
+                      <td className="px-3 py-3">
+                        <img
+                          src={project.image_path}
+                          alt=""
+                          style={{ width: 60 }}
+                        />
+                      </td>
                       <td className="px-3 py-3">{project.name}</td>
-                      <td className="px-3 py-3">{project.status}</td>
+                      <td className="px-3 py-3">
+                        <span
+                          className={
+                            "px-2 py-1 rounded text-white " +
+                            PROJECT_STATUS_CLASS_MAP[project.status]
+                          }
+                        >{PROJECT_STATUS_TEXT_MAP[project.status]}</span>
+                      </td>
                       <td className="px-3 py-3">{project.created_at}</td>
                       <td className="px-3 py-3">{project.due_date}</td>
                       <td className="px-3 py-3">{project.createdBy.name}</td>
                       <td className="px-3 py-3 flex gap-2">
-                        <Link href={route('project.edit', project.id)}
-                         className="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-400">
+                        <Link
+                          href={route("project.edit", project.id)}
+                          className="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-400"
+                        >
                           Edit
                         </Link>
-                        <Link href={route('project.destroy', project.id)}
-                         className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-400">
+                        <Link
+                          href={route("project.destroy", project.id)}
+                          className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-400"
+                        >
                           Delete
                         </Link>
                       </td>
-                   </tr>
+                    </tr>
                   ))}
                 </tbody>
               </table>
