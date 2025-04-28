@@ -1,26 +1,25 @@
-import Pagination from "@/Components/Pagination";
-import SelectInput from "@/Components/SelectInput";
-import TextInput from "@/Components/TextInput";
-import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from "@/constants";
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link, router } from "@inertiajs/react";
+import Pagination from '@/Components/Pagination'
+import SelectInput from '@/Components/SelectInput'
+import TextInput from '@/Components/TextInput'
+import { PROJECT_STATUS_CLASS_MAP, PROJECT_STATUS_TEXT_MAP } from '@/constants'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
+import { Head, Link, router } from '@inertiajs/react'
 
 export default function Index({ auth, projects, queryParams = null }) {
-  queryParams = queryParams || {};
+  queryParams = queryParams || {}
   const searchFieldChanged = (name, value) => {
-
     if (value) {
-       queryParams[name] = value
+      queryParams[name] = value
     } else {
       delete queryParams[name]
     }
 
-    router.get(route("project.index"), queryParams);
+    router.get(route('project.index'), queryParams)
   }
 
   const onKeyPress = (name, e) => {
-    if (e.key !== 'Enter') return;
-    searchFieldChanged(name, e.target.value);
+    if (e.key !== 'Enter') return
+    searchFieldChanged(name, e.target.value)
   }
 
   return (
@@ -59,19 +58,15 @@ export default function Index({ auth, projects, queryParams = null }) {
                         className="w-full"
                         defaultValue={queryParams.name}
                         placeholder="Project Name"
-                        onBlur={(e) =>
-                          searchFieldChanged("name", e.target.value)
-                        }
-                        onKeyPress={(e) => onKeyPress("name", e)}
+                        onBlur={e => searchFieldChanged('name', e.target.value)}
+                        onKeyPress={e => onKeyPress('name', e)}
                       />
                     </th>
                     <th className="px-3 py-2">
                       <SelectInput
                         className="w-full"
                         defaultValue={queryParams.status}
-                        onChange={(e) =>
-                          searchFieldChanged("status", e.target.value)
-                        }
+                        onChange={e => searchFieldChanged('status', e.target.value)}
                       >
                         <option value="">Select Status</option>
                         <option value="pending">Pending</option>
@@ -86,24 +81,20 @@ export default function Index({ auth, projects, queryParams = null }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {projects.data.map((project) => (
+                  {projects.data.map(project => (
                     <tr
                       key={project.id}
                       className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                     >
                       <td className="px-3 py-3">{project.id}</td>
                       <td className="px-3 py-3">
-                        <img
-                          src={project.image_path}
-                          alt=""
-                          style={{ width: 60 }}
-                        />
+                        <img src={project.image_path} alt="" style={{ width: 60 }} />
                       </td>
                       <td className="px-3 py-3">{project.name}</td>
                       <td className="px-3 py-3">
                         <span
                           className={
-                            "px-2 py-1 rounded text-white " +
+                            'px-2 py-1 rounded text-white ' +
                             PROJECT_STATUS_CLASS_MAP[project.status]
                           }
                         >
@@ -115,13 +106,13 @@ export default function Index({ auth, projects, queryParams = null }) {
                       <td className="px-3 py-3">{project.createdBy.name}</td>
                       <td className="px-3 py-3 flex gap-2">
                         <Link
-                          href={route("project.edit", project.id)}
+                          href={route('project.edit', project.id)}
                           className="text-blue-600 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-400"
                         >
                           Edit
                         </Link>
                         <Link
-                          href={route("project.destroy", project.id)}
+                          href={route('project.destroy', project.id)}
                           className="text-red-600 hover:text-red-900 dark:text-red-500 dark:hover:text-red-400"
                         >
                           Delete
@@ -137,5 +128,5 @@ export default function Index({ auth, projects, queryParams = null }) {
         </div>
       </div>
     </AuthenticatedLayout>
-  );
+  )
 }
