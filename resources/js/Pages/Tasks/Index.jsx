@@ -151,8 +151,7 @@ export default function Index({ auth, tasks, queryParams = null }) {
                         <td className="px-3 py-3">
                           <span
                             className={
-                              'px-2 py-1 rounded text-white ' +
-                              TASK_STATUS_CLASS_MAP[task.status]
+                              'px-2 py-1 rounded text-white ' + TASK_STATUS_CLASS_MAP[task.status]
                             }
                           >
                             {TASK_STATUS_TEXT_MAP[task.status]}
