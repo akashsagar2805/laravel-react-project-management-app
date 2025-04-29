@@ -24,6 +24,7 @@
     "vite": "^6.2.4"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@magic/format": "^0.0.66"
   }
 }
