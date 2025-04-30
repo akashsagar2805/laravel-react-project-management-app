@@ -5,7 +5,12 @@ import TextInput from '@/Components/TextInput'
 import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants'
 import { Link, router } from '@inertiajs/react'
 
-export default function TaskTable({ tasks, queryParams = null, hideProjectColumn = false }) {
+export default function TaskTable({
+  tasks,
+  queryParams = null,
+  hideProjectColumn = false,
+  projectId = null,
+}) {
   queryParams = queryParams || {}
 
   const sortChanged = name => {
@@ -20,7 +25,11 @@ export default function TaskTable({ tasks, queryParams = null, hideProjectColumn
       queryParams.sort_direction = 'asc'
     }
 
-    router.get(route('task.index'), queryParams)
+    router.get(
+      !hideProjectColumn ? route('project.index') : route('project.show', projectId),
+      queryParams,
+      { preserveScroll: true },
+    )
   }
 
   const searchFieldChanged = (name, value) => {
@@ -30,7 +39,11 @@ export default function TaskTable({ tasks, queryParams = null, hideProjectColumn
       delete queryParams[name]
     }
 
-    router.get(route('task.index'), queryParams)
+    if (!hideProjectColumn) {
+      router.get(route('task.index'), queryParams)
+    } else {
+      router.get(route('project.show', projectId), queryParams)
+    }
   }
 
   const onKeyPress = (name, e) => {
