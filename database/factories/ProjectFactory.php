@@ -21,7 +21,7 @@ class ProjectFactory extends Factory
             'description' => $this->faker->realText(),
             'due_date' => $this->faker->dateTimeBetween('now', '+1 year'),
             'status' => $this->faker->randomElement(['pending', 'in_progress', 'completed']),
-            'image_path' => $this->faker->imageUrl(),
+            'image_path' => 'https://picsum.photos/640/480?'.$this->faker->uuid, // Use Lorem Picsum
             'created_by' => 1,
             'updated_by' => 1,
         ];
