@@ -26,7 +26,7 @@ class TaskFactory extends Factory
             'created_by' => 1,
             'assigned_user_id' => 1,
             'updated_by' => 1,
-            'image_path' => $this->faker->imageUrl(),
+            'image_path' => 'https://picsum.photos/640/480?'.$this->faker->uuid,
         ];
     }
 }

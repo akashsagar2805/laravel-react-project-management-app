@@ -65,7 +65,7 @@ export default function Index({ auth, tasks, queryParams = null }) {
                       >
                         ID
                       </TableHeading>
-                      {/* <th className="px-3 py-2">Image</th> */}
+                      <th className="px-3 py-2">Image</th>
                       <TableHeading
                         name="name"
                         sort_field={queryParams.sort_field}
@@ -105,7 +105,7 @@ export default function Index({ auth, tasks, queryParams = null }) {
                   <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 border-b-2 border-gray-500">
                     <tr className="text-nowrap">
                       <th className="px-3 py-2"></th>
-                      {/* <th className="px-3 py-2"></th> */}
+                      <th className="px-3 py-2"></th>
                       <th className="px-3 py-2">
                         <TextInput
                           className="w-full"
@@ -140,13 +140,9 @@ export default function Index({ auth, tasks, queryParams = null }) {
                         className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                       >
                         <td className="px-3 py-3">{task.id}</td>
-                        {/* <td className="px-3 py-3">
-                          <img
-                            src={task.image_path}
-                            alt=""
-                            style={{ width: 60 }}
-                          />
-                        </td> */}
+                        <td className="px-3 py-3">
+                          <img src={task.image_path} alt="" style={{ width: 60 }} />
+                        </td>
                         <td className="px-3 py-3">{task.name}</td>
                         <td className="px-3 py-3">
                           <span
