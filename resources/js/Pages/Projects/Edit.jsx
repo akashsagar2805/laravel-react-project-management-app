@@ -7,18 +7,18 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
 import { Head, Link, useForm } from '@inertiajs/react'
 
 export default function Create({ auth, project }) {
-  const {  data, setData, post, errors, reset } = useForm({
+  const { data, setData, post, errors, reset } = useForm({
     image: '',
     name: project.name || '',
     status: project.status || '',
     description: project.description || '',
     due_date: project.due_date || '',
-    _method: "PUT",
+    _method: 'PUT',
   })
 
   const onSubmit = e => {
-      e.preventDefault()
-      post(route("project.update", project.id))
+    e.preventDefault()
+    post(route('project.update', project.id))
   }
 
   return (
@@ -42,10 +42,10 @@ export default function Create({ auth, project }) {
             >
               {project.image_path && (
                 <div>
-                <img src={project.image_path} alt="" className="w-full h-64 object-cover" />
-              </div>
+                  <img src={project.image_path} alt="" className="w-full h-64 object-cover" />
+                </div>
               )}
-              <div className='mt-4'>
+              <div className="mt-4">
                 <InputLabel htmlFor="project_image_path" value="Project Image" />
                 <TextInput
                   id="project_image_path"
