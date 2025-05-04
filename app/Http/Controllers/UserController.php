@@ -80,7 +80,13 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $data = $request->validated();
-        // dd($data);
+        $password = $data['password'] ?? null;
+        if ($password) {
+            $data['password'] = bcrypt($password);
+        } else {
+            unset($data['password']);   
+        }
+        
         $user->update($data);
 
         return redirect()->route('user.index')->with('success', 'User updated successfully.');
