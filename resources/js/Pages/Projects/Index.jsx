@@ -42,7 +42,9 @@ export default function Index({ auth, projects, queryParams = null, success }) {
     if (!window.confirm('Are you sure you want to delete the project ?')) {
       return
     }
-    router.delete(route('project.destroy', project.id), { preserveScroll: true })
+    router.delete(route('project.destroy', project.id), {
+      preserveScroll: true,
+    })
   }
 
   return (
