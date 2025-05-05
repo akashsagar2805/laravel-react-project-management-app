@@ -1,9 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout'
-import { Head } from '@inertiajs/react'
-import { TASK_STATUS_CLASS_MAP, TASK_STATUS_TEXT_MAP } from '@/constants'
-import TaskTable from '../Tasks/TaskTable'
+import { Head, Link } from '@inertiajs/react'
+import {
+  TASK_PRIORITY_CLASS_MAP,
+  TASK_PRIORITY_TEXT_MAP,
+  TASK_STATUS_CLASS_MAP,
+  TASK_STATUS_TEXT_MAP,
+} from '@/constants'
 
-export default function Show({ task, auth, tasks, queryParams = null }) {
+export default function Show({ task, auth }) {
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -33,7 +37,7 @@ export default function Show({ task, auth, tasks, queryParams = null }) {
                     <p className="mt-1">{task.name}</p>
                   </div>
                   <div className="mt-4">
-                    <label className="font-bold text-lg">Task Name</label>
+                    <label className="font-bold text-lg">Task Status</label>
                     <p className="mt-3">
                       <span
                         className={
@@ -48,6 +52,10 @@ export default function Show({ task, auth, tasks, queryParams = null }) {
                     <label className="font-bold text-lg">Created By</label>
                     <p className="mt-1">{task.createdBy.name}</p>
                   </div>
+                  <div className="mt-4">
+                    <label className="font-bold text-lg">Assigned To</label>
+                    <p className="mt-1">{task.assignedUser.name}</p>
+                  </div>
                 </div>
                 <div>
                   <div>
@@ -61,6 +69,24 @@ export default function Show({ task, auth, tasks, queryParams = null }) {
                   <div className="mt-4">
                     <label className="font-bold text-lg">Updated By</label>
                     <p className="mt-1">{task.updatedBy.name}</p>
+                  </div>
+                  <div className="mt-4">
+                    <label className="font-bold text-lg">Task Priority</label>
+                    <p className="mt-3">
+                      <span
+                        className={
+                          'px-2 py-1 rounded text-white ' + TASK_PRIORITY_CLASS_MAP[task.priority]
+                        }
+                      >
+                        {TASK_PRIORITY_TEXT_MAP[task.priority]}
+                      </span>
+                    </p>
+                  </div>
+                  <div className="mt-4">
+                    <label className="font-bold text-lg">Project</label>
+                    <p className="mt-1 hover:underline text-gray-100 text-nowrap">
+                      <Link href={route('project.show', task.project.id)}>{task.project.name}</Link>
+                    </p>
                   </div>
                 </div>
               </div>
